@@ -1,6 +1,6 @@
 # **D&D Storybook**
 
-I recently started playing Dungeons and Dragons for the first time with some friends, and thought to myself, wouldn't it be cool if we had somewhere we could record our adventures after each session? I want to be able to look back years from now and remember the story of our charachters journeys.
+I recently started playing Dungeons and Dragons for the first time with some friends, and thought to myself, wouldn't it be cool if we had somewhere we could record our adventures after each session? I want to be able to look back years from now and remember the story of our characters journeys.
 
 Thus, **D&D Storybook**. Currently under construction. 
 
