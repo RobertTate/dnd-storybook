@@ -93,8 +93,13 @@ const resolvers = {
     logs: (parent, args, context, info) => {
       return LOGS.filter((log) => {
         return parent.id === log.characterId;
-      })
+      });
     },
+    player: (parent, args, context, info) => {
+      return PLAYERS.find((player) => {
+        return parent.playerId === player.id;
+      });
+    }
   }
 }
 

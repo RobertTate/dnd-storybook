@@ -52,6 +52,7 @@ const typeDefinitions = gql`
 
   type Character {
     id: ID!
+    player: Player!
     logs: [Log]
     name: String!
     race: String!

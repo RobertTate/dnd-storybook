@@ -1,6 +1,8 @@
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config();
 
 async function startApolloServer() {
   // Construct a schema, using GraphQL schema language
@@ -12,6 +14,13 @@ async function startApolloServer() {
   await server.start();
 
   const app = express();
+
+  mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@${process.env.MONGO_DB_URL}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`);
+  mongoose.connection.on('error', console.error.bind(console, 'Connection Error: '));
+  mongoose.connection.once('open', ()=> {
+    console.log('\n🚀 Connected to Database 🚀\n');
+  });
+
   app.use(express.static(path.join(__dirname, '../build')))
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
