@@ -5,21 +5,12 @@ const path = require('path');
 require('dotenv').config();
 
 async function startApolloServer() {
-  // Construct a schema, using GraphQL schema language
   const typeDefs = require('./schema');
-  // Provide resolver functions for your schema fields
   const resolvers = require('./resolvers');
-
-  const server = new ApolloServer({typeDefs, resolvers});
+  const server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
 
   const app = express();
-
-  mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@${process.env.MONGO_DB_URL}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`);
-  mongoose.connection.on('error', console.error.bind(console, 'Connection Error: '));
-  mongoose.connection.once('open', ()=> {
-    console.log('\n🚀 Connected to Database 🚀\n');
-  });
 
   app.use(express.static(path.join(__dirname, '../build')))
   app.get('/', (req, res) => {
@@ -34,4 +25,18 @@ async function startApolloServer() {
   return { server, app };
 };
 
+function connectToDB() {
+  mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@${process.env.MONGO_DB_URL}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`,
+    { 
+      useNewUrlParser: true, 
+      useUnifiedTopology: true 
+    }
+  );
+  mongoose.connection.on('error', console.error.bind(console, 'Connection Error: '));
+  mongoose.connection.once('open', () => {
+    console.log('🚀 Connected to Database 🚀\n');
+  });
+}
+
 startApolloServer();
+connectToDB();

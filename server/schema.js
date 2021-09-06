@@ -9,9 +9,9 @@ const typeDefinitions = gql`
   type Campaign {
     id: ID!
     name: String!
-    overview: String!
-    player(id: ID!): Player!
-    players: [Player]!
+    overview: String
+    player(id: ID!): Player
+    players: [Player]
     character(id: ID!): Character
     characters: [Character]
     session(id: ID!): Session
@@ -48,6 +48,7 @@ const typeDefinitions = gql`
     userName: String!
     role: Role!
     characters: [Character]
+    campaigns: [Campaign]
   }
 
   type Character {
@@ -63,6 +64,18 @@ const typeDefinitions = gql`
     storyArch: String
     favoriteWeapon: String
     favoriteSpell: String
+  }
+
+  type Mutation {
+    createCampaign(name:String): Campaign
+    updateCampaignOverview(id:ID!, overview:String): Campaign
+    createPlayer(
+      campaignIds: [String],
+      name: String,
+      userName: String,
+      role: Role
+    ): Player
+    addPlayerToCampaign(playerId: ID!, campaignId: ID!): Player
   }
 `
 

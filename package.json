@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node ./server/index.js",
-    "server:watch": "nodemon ./server/index.js"
+    "server:watch": "nodemon ./server/index.js",
+    "debug": "nodemon --inspect ./server/index.js"
   },
   "eslintConfig": {
     "extends": [
