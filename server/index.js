@@ -1,7 +1,8 @@
+const path = require('path');
+
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
 require('dotenv').config();
 
 async function startApolloServer() {
